@@ -1,29 +1,146 @@
 let city = "dallas"
-let defaultAPI = " "
+let apiKey = "65ef27820467ea362dfa4c9ad453d89d"
+
+let resultTextEl = document.querySelector('#result-text');
+let resultContentEl = document.querySelector('#result-content');
+let searchFormEl = document.querySelector('#search-form');
 
 
 
-fetch("api.openweathermap.org/data/2.5/forecast?q=dallas&appid= ")
+let tempSpanEl = document.querySelector(`.tempSpan`)
+let humidSpanEl = document.querySelector(`.humidSpan`)
+let windSpanEl = document.querySelector(`.windSpan`)
 
+let tempSpanF1El = document.querySelector(`.tempF1Span`)
+let humidSpanF1El = document.querySelector(`.humidF1Span`)
+let windSpanF1El = document.querySelector(`.windF1Span`)
+
+let tempSpanF2El = document.querySelector(`.tempF2Span`)
+let humidSpanF2El = document.querySelector(`.humidF2Span`)
+let windSpanF2El = document.querySelector(`.windF2Span`)
+
+let tempSpanF3El = document.querySelector(`.tempF3Span`)
+let humidSpanF3El = document.querySelector(`.humidF3Span`)
+let windSpanF3El = document.querySelector(`.windF3Span`)
+
+let tempSpanF4El = document.querySelector(`.tempF4Span`)
+let humidSpanF4El = document.querySelector(`.humidF4Span`)
+let windSpanF4El = document.querySelector(`.windF4Span`)
+
+let tempSpanF5El = document.querySelector(`.tempF5Span`)
+let humidSpanF5El = document.querySelector(`.humidF5Span`)
+let windSpanF5El = document.querySelector(`.windF5Span`)
+
+// searchFormEl.addEventListener('submit', handleSearchFormSubmit);
+
+
+fetch("https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid="+apiKey+"&units=imperial")
 .then(response => response.json())
 .then(function(data){
-
-console.log(data);
-
+  console.log(data)
+  let tempData = data.main.temp
+  let humidData= data.main.humidity
+  let windData= data.wind.speed
+  tempSpanEl.textContent = " "+tempData+"°F";
+  humidSpanEl.textContent = " "+humidData+"%";
+  windSpanEl.textContent = " "+windData+"mph";
+  
 })
-fetch("api.openweathermap.org/data/2.5/forecast?q=dallas&appid= ")
 
+//  Forecast
+
+
+fetch("https://api.openweathermap.org/data/2.5/forecast?q="+city+"&appid="+apiKey+"&units=imperial")
 .then(response => response.json())
 .then(function(data){
+console.log(data)
 
-console.log(data);
+let tempF1Data = data.list[1].main.temp
+let humidF1Data= data.list[1].main.humidity
+let windF1Data= data.list[1].wind.speed
+tempSpanF1El.textContent = " "+tempF1Data+"°";
+humidSpanF1El.textContent = " "+humidF1Data+"%";
+windSpanF1El.textContent = " "+windF1Data+"mph";
+
+let tempF2Data = data.list[9].main.temp
+let humidF2Data= data.list[9].main.humidity
+let windF2Data= data.list[9].wind.speed
+tempSpanF2El.textContent = " "+tempF2Data+"°";
+humidSpanF2El.textContent = " "+humidF2Data+"%";
+windSpanF2El.textContent = " "+windF2Data+"mph";
+
+let tempF3Data = data.list[17].main.temp
+let humidF3Data= data.list[17].main.humidity
+let windF3Data= data.list[17].wind.speed
+tempSpanF3El.textContent = " "+tempF3Data+"°";
+humidSpanF3El.textContent = " "+humidF3Data+"%";
+windSpanF3El.textContent = " "+windF3Data+"mph";
+
+let tempF4Data = data.list[25].main.temp
+let humidF4Data= data.list[25].main.humidity
+let windF4Data= data.list[25].wind.speed
+tempSpanF4El.textContent = " "+tempF4Data+"°";
+humidSpanF4El.textContent = " "+humidF4Data+"%";
+windSpanF4El.textContent = " "+windF4Data+"mph";
+
+let tempF5Data = data.list[33].main.temp
+let humidF5Data= data.list[33].main.humidity
+let windF5Data= data.list[33].wind.speed
+tempSpanF5El.textContent = " "+tempF5Data+"°";
+humidSpanF5El.textContent = " "+humidF5Data+"%";
+windSpanF5El.textContent = " "+windF5Data+"mph";
+
 
 })
-fetch("api.openweathermap.org/data/2.5/forecast?q=dallas&appid= ")
 
-.then(response => response.json())
-.then(function(data){
 
-console.log(data);
+// // https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
+// fetch("https://api.openweathermap.org/data/2.5/onecall?q="+city+"&appid="+apiKey+"&units=imperial")
+// .then(response => response.json())
+// .then(function(data){
+// console.log(data)
+// let tempData = data.list[0].main.temp
+// let humidData= temp1.list[0].main.humidity
+// let humidData= temp1.list[0].main.humidity
+// })
 
-})
+// fetch("https://api.openweathermap.org/data/2.5/forecast?q="+city+"&appid="+apiKey)
+// .then(response => response.json())
+// .then(function(data){
+// // console.log(data)
+// })
+
+// fetch("https://api.openweathermap.org/data/2.5/forecast?q="+city+"&appid="+apiKey)
+// .then(response => response.json())
+// .then(function(data){
+// console.log(data);
+// })
+
+
+
+// function handleSearchFormSubmit(event) {
+//   event.preventDefault();
+
+//   let searchInputVal = document.querySelector('#search-input').value;
+
+//   if (!searchInputVal) {
+//     console.error('You need a search input value!');
+//     return;
+//   }
+
+// }
+
+
+
+
+// function getParams() {
+//   // Get the search params out of the URL (i.e. `?q=london&format=photo`) and convert it to an array (i.e. ['?q=london', 'format=photo'])
+//   var searchParamsArr = document.location.search.split('&');
+
+//   // Get the query and format values
+//   var query = searchParamsArr[0].split('=').pop();
+//   var format = searchParamsArr[1].split('=').pop();
+
+//   searchApi(query, format);
+// }
+
