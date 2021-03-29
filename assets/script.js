@@ -13,8 +13,6 @@ let humidSpanEl = document.querySelector(`.humidSpan`)
 let windSpanEl = document.querySelector(`.windSpan`)
 
 
-
-
 let tempSpanF1El = document.querySelector(`.tempF1Span`)
 let humidSpanF1El = document.querySelector(`.humidF1Span`)
 let windSpanF1El = document.querySelector(`.windF1Span`)
