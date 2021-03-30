@@ -35,10 +35,7 @@ let tempSpanF5El = document.querySelector(`.tempF5Span`)
 let humidSpanF5El = document.querySelector(`.humidF5Span`)
 let windSpanF5El = document.querySelector(`.windF5Span`)
 
-
-
 let cityEl = document.querySelector(`.citySel`)
-
 
 let citiesList = document.querySelector(".historyButtonCon");
 let clearBtnEl = document.querySelector("#clearBtn");
@@ -46,44 +43,32 @@ let clearBtnEl = document.querySelector("#clearBtn");
 let cities = [];
 let city = "";
 
+let todaysDate = moment().format("dddd, MMMM Do YYYY");
 
 init();
 
-
 searchFormEl.addEventListener('submit', handleSearch);
-
 citiesList.addEventListener('click', citySelected);
-
 clearBtnEl.addEventListener('click', clearSearchHistory); 
 
 function citySelected(event) {
 
-  console.log(event.target)
   getWeather(event.target.textContent)
   
 }
 
-
-
 function clearSearchHistory(event){
   event.preventDefault();
-  console.log("Hi")
 
-  
   cities = [];
   renderCities();
   storeCities();
   
 };
 
-
-
 function handleSearch(event) {
   event.preventDefault();
   
-  console.log("HI")
-
-
   let searchInputVal = document.querySelector('#search-input').value;
   if ((searchInputVal === "")||(searchInputVal === " ")) {
     alertEl.classList.remove('hide')
@@ -95,41 +80,33 @@ function handleSearch(event) {
     
     city = searchInputVal
     
-
-
-
     
     for (let i = 0; i < cities.length; i++) {
       
       if (cities[i] === city){
         
-        return;
-        
+        return;    
       } 
-      
     }  
     
     cities.unshift(city);
     
     storeCities();
     renderCities();
-    
-    
+   
     getWeather(city);
     
   }
   
-  
 } 
-
 
 function getWeather(city) {
   
-  
+  // API 
   fetch("https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid="+apiKey+"&units=imperial")
   .then(response => response.json())
   .then(function(data){
-    console.log(data)
+    
     let tempData = data.main.temp
     let humidData= data.main.humidity
     let windData= data.wind.speed
@@ -138,7 +115,7 @@ function getWeather(city) {
     
     let iconsURl = "https://openweathermap.org/img/w/"+wIconData+".png"
     
-    cityEl.textContent = cityName;
+    cityEl.textContent = cityName + " – " + todaysDate;
     document.getElementById("wicon").src = iconsURl;
     tempSpanEl.textContent = " "+tempData+"°F";
     humidSpanEl.textContent = " "+humidData+"%";
@@ -146,9 +123,7 @@ function getWeather(city) {
     
     let latData = data.coord.lat
     let lonData = data.coord.lon
-    console.log(latData)
-    console.log(lonData)
-
+    
     getUV(latData, lonData);
 
     function getUV(latData, lonData){
@@ -160,14 +135,10 @@ function getWeather(city) {
         return response.json();
       })
       .then(function (data) {
-    
-        console.log('weekly forecast');
-        console.log(data);
-        
+      
         uvNumb = data.current.uvi;
-        console.log(uvNumb)
         uvString = uvNumb.toString();
-        console.log(uvString)
+
         uvSpanEl.classList.remove("lowUV","medUV","highUV")
         if (uvNumb <=2) {
           
@@ -180,22 +151,18 @@ function getWeather(city) {
           uvSpanEl.classList.add("highUV")
         }
 
-        uvSpanEl.textContent = " " + uvString + " ";
-
+        uvSpanEl.textContent = " " + uvString + "  ";
       });
-
 
     }
 
-
   })
 
-  
+  // API call for forecast Data
   fetch("https://api.openweathermap.org/data/2.5/forecast?q="+city+"&appid="+apiKey+"&units=imperial")
   .then(response => response.json())
   .then(function(data){
   
-    console.log(data)
   
     // Day 1 Info
     let tempF1Data = data.list[1].main.temp
@@ -277,39 +244,33 @@ function getWeather(city) {
     let iconsF5URl = "https://openweathermap.org/img/w/"+wIconF5Data+".png"
     document.getElementById("wiconF5").src = iconsF5URl;
   
-  
-  
   })
-
 
 }
 
-
+// Generates the history buttons
 function renderCities() {
 
   citiesList.innerHTML = "";
-
-  console.log(cities)
   
   for (var i = 0; i < cities.length; i++) {
     let cityB = cities[i];
-    console.log(cityB)
     cbutton = $(`<button class="btn btn-info btn-block mb-3 histBtn" id="searchBtn">${cityB}</button>`)
     
     $(".historyButtonCon").append(cbutton);
   }
 }
 
+// Stores items to the local storage
 function storeCities() {
   
-  console.log(cities)
-
   localStorage.setItem("cities", JSON.stringify(cities));
 }
   
+// Immediately renders past searched cities
 function init() {
   let storedCities = JSON.parse(localStorage.getItem("cities"));
-  console.log(storedCities)
+
   if (storedCities !== null) {
     cities = storedCities;
   }

@@ -3,12 +3,6 @@
 
 ## About
 
-  An employee with a busy schedule is able to add important events to a daily planner that does not lose data on page refresh after event submission to assist in effective time management.
-
-  The current day is displayed at the top of the planner along with timeblocks for each hour of the standard business day. The timeblocks for each hour are color coded to indicate whether the hour is in the past, present, or future. The save button to the right of each timeblock will save whatever text is inputted to the color coded blocks to the local storage correlated for that timeblock.
+  A User is able to search the site for weather data in different cities and recieve weather information across multiple APIs within one page. The site also stores recently searched cities and allows for easy recall of the weather information for these cities. The current forecast displays the UV index for the current time of the city in a color coded range for low, medium, and high UV index values. The clear button beneath the function deletes the recently search cities from the history. 
   
-  The site may be accessed at: [its GitHub page url](https://anth8nyc.github.io/workdaysched/)
-
-  The following gif also demonstrates the application functionality:
-
-  ![A user clicks on slots on the color-coded calendar and edits the events.](./assets/schedulerdemo.gif)
+  The site may be accessed at: [its GitHub page url](https://anth8nyc.github.io/weatherapp/)
