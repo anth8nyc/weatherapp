@@ -1,4 +1,4 @@
-# weatherapp# Site Preview
+# Site Preview
 ![Site Preview](./assets/weatherapp.png)
 
 ## About
