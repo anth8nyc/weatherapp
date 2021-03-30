@@ -52,16 +52,27 @@ init();
 
 searchFormEl.addEventListener('submit', handleSearch);
 
+citiesList.addEventListener('click', citySelected);
+
 clearBtnEl.addEventListener('click', clearSearchHistory); 
+
+function citySelected(event) {
+
+  console.log(event.target)
+  getWeather(event.target.textContent)
+  
+}
 
 
 
 function clearSearchHistory(event){
   event.preventDefault();
   console.log("Hi")
+
   
   cities = [];
   renderCities();
+  storeCities();
   
 };
 
@@ -78,30 +89,34 @@ function handleSearch(event) {
     alertEl.classList.remove('hide')
     
   } else{
-
+    
+    alertEl.classList.add('hide')
     resultsEl.classList.remove('hide')
     
     city = searchInputVal
-    cityEl.textContent = city;
-  
+    
+
+
+
+    
     for (let i = 0; i < cities.length; i++) {
       
-      if (cities[i] == city){
+      if (cities[i] === city){
         
         return;
-
+        
       } 
       
     }  
     
-    cities.push(city);
+    cities.unshift(city);
     
     storeCities();
     renderCities();
-
-
+    
+    
     getWeather(city);
-
+    
   }
   
   
@@ -109,8 +124,8 @@ function handleSearch(event) {
 
 
 function getWeather(city) {
-
-
+  
+  
   fetch("https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid="+apiKey+"&units=imperial")
   .then(response => response.json())
   .then(function(data){
@@ -119,10 +134,11 @@ function getWeather(city) {
     let humidData= data.main.humidity
     let windData= data.wind.speed
     let wIconData = data.weather[0].icon
+    let cityName = data.name
     
-  
-    let iconsURl = "http://openweathermap.org/img/w/"+wIconData+".png"
-  
+    let iconsURl = "https://openweathermap.org/img/w/"+wIconData+".png"
+    
+    cityEl.textContent = cityName;
     document.getElementById("wicon").src = iconsURl;
     tempSpanEl.textContent = " "+tempData+"°F";
     humidSpanEl.textContent = " "+humidData+"%";
@@ -152,7 +168,19 @@ function getWeather(city) {
         console.log(uvNumb)
         uvString = uvNumb.toString();
         console.log(uvString)
-        uvSpanEl.textContent = " " + uvString;
+        uvSpanEl.classList.remove("lowUV","medUV","highUV")
+        if (uvNumb <=2) {
+          
+          uvSpanEl.classList.add("lowUV")
+        } else if ((uvNumb > 2)&&(uvNumb < 7) ){
+          
+          uvSpanEl.classList.add("medUV")
+        } else {
+          
+          uvSpanEl.classList.add("highUV")
+        }
+
+        uvSpanEl.textContent = " " + uvString + " ";
 
       });
 
@@ -181,7 +209,7 @@ function getWeather(city) {
     dayF1El.textContent = " "+dayF1Data
     
     let wIconF1Data = data.list[1].weather[0].icon
-    let iconsF1URl = "http://openweathermap.org/img/w/"+wIconF1Data+".png"
+    let iconsF1URl = "https://openweathermap.org/img/w/"+wIconF1Data+".png"
     document.getElementById("wiconF1").src = iconsF1URl;
     
     // Day 2 Info
@@ -197,7 +225,7 @@ function getWeather(city) {
 
     
     let wIconF2Data = data.list[9].weather[0].icon
-    let iconsF2URl = "http://openweathermap.org/img/w/"+wIconF2Data+".png"
+    let iconsF2URl = "https://openweathermap.org/img/w/"+wIconF2Data+".png"
     document.getElementById("wiconF2").src = iconsF2URl;
   
   
@@ -214,7 +242,7 @@ function getWeather(city) {
 
     
     let wIconF3Data = data.list[17].weather[0].icon
-    let iconsF3URl = "http://openweathermap.org/img/w/"+wIconF3Data+".png"
+    let iconsF3URl = "https://openweathermap.org/img/w/"+wIconF3Data+".png"
     document.getElementById("wiconF3").src = iconsF3URl;
   
     // Day 4 Info
@@ -230,7 +258,7 @@ function getWeather(city) {
 
   
     let wIconF4Data = data.list[25].weather[0].icon
-    let iconsF4URl = "http://openweathermap.org/img/w/"+wIconF4Data+".png"
+    let iconsF4URl = "https://openweathermap.org/img/w/"+wIconF4Data+".png"
     document.getElementById("wiconF4").src = iconsF4URl;
     
     // Day 5 Info
@@ -246,7 +274,7 @@ function getWeather(city) {
 
   
     let wIconF5Data = data.list[33].weather[0].icon
-    let iconsF5URl = "http://openweathermap.org/img/w/"+wIconF5Data+".png"
+    let iconsF5URl = "https://openweathermap.org/img/w/"+wIconF5Data+".png"
     document.getElementById("wiconF5").src = iconsF5URl;
   
   
@@ -259,11 +287,13 @@ function getWeather(city) {
 
 function renderCities() {
 
+  citiesList.innerHTML = "";
 
-  
   console.log(cities)
+  
   for (var i = 0; i < cities.length; i++) {
     let cityB = cities[i];
+    console.log(cityB)
     cbutton = $(`<button class="btn btn-info btn-block mb-3 histBtn" id="searchBtn">${cityB}</button>`)
     
     $(".historyButtonCon").append(cbutton);
@@ -273,6 +303,7 @@ function renderCities() {
 function storeCities() {
   
   console.log(cities)
+
   localStorage.setItem("cities", JSON.stringify(cities));
 }
   
