@@ -1,52 +1,112 @@
 let apiKey = "65ef27820467ea362dfa4c9ad453d89d"
 
-let resultTextEl = document.querySelector('#result-text');
-let resultContentEl = document.querySelector('#result-content');
+let resultsEl = document.querySelector('.results');
+let alertEl = document.querySelector('.alert');
 let searchFormEl = document.querySelector('#search-form');
 
 let wIconEl = document.querySelector(`#wicon`)
 let tempSpanEl = document.querySelector(`.tempSpan`)
 let humidSpanEl = document.querySelector(`.humidSpan`)
 let windSpanEl = document.querySelector(`.windSpan`)
+let uvSpanEl = document.querySelector(`.uvSpan`)
 
+let dayF1El = document.querySelector(`#dayF1`)
 let tempSpanF1El = document.querySelector(`.tempF1Span`)
 let humidSpanF1El = document.querySelector(`.humidF1Span`)
 let windSpanF1El = document.querySelector(`.windF1Span`)
+
+let dayF2El = document.querySelector(`#dayF2`)
 let tempSpanF2El = document.querySelector(`.tempF2Span`)
 let humidSpanF2El = document.querySelector(`.humidF2Span`)
 let windSpanF2El = document.querySelector(`.windF2Span`)
+
+let dayF3El = document.querySelector(`#dayF3`)
 let tempSpanF3El = document.querySelector(`.tempF3Span`)
 let humidSpanF3El = document.querySelector(`.humidF3Span`)
 let windSpanF3El = document.querySelector(`.windF3Span`)
+
+let dayF4El = document.querySelector(`#dayF4`)
 let tempSpanF4El = document.querySelector(`.tempF4Span`)
 let humidSpanF4El = document.querySelector(`.humidF4Span`)
 let windSpanF4El = document.querySelector(`.windF4Span`)
+
+let dayF5El = document.querySelector(`#dayF5`)
 let tempSpanF5El = document.querySelector(`.tempF5Span`)
 let humidSpanF5El = document.querySelector(`.humidF5Span`)
 let windSpanF5El = document.querySelector(`.windF5Span`)
 
 
+
 let cityEl = document.querySelector(`.citySel`)
 
-function handleSearchFormSubmit(event) {
+
+let citiesList = document.querySelector(".historyButtonCon");
+let clearBtnEl = document.querySelector("#clearBtn");
+
+let cities = [];
+let city = "";
+
+
+init();
+
+
+searchFormEl.addEventListener('submit', handleSearch);
+
+clearBtnEl.addEventListener('click', clearSearchHistory); 
+
+
+
+function clearSearchHistory(event){
+  event.preventDefault();
+  console.log("Hi")
+  
+  cities = [];
+  renderCities();
+  
+};
+
+
+
+function handleSearch(event) {
   event.preventDefault();
   
+  console.log("HI")
+
+
   let searchInputVal = document.querySelector('#search-input').value;
-  console.log(searchInputVal)
-  if (!searchInputVal) {
-    console.error('You need a search input value!');
-    return;
+  if ((searchInputVal === "")||(searchInputVal === " ")) {
+    alertEl.classList.remove('hide')
+    
+  } else{
+
+    resultsEl.classList.remove('hide')
+    
+    city = searchInputVal
+    cityEl.textContent = city;
+  
+    for (let i = 0; i < cities.length; i++) {
+      
+      if (cities[i] == city){
+        
+        return;
+
+      } 
+      
+    }  
+    
+    cities.push(city);
+    
+    storeCities();
+    renderCities();
+
+
+    getWeather(city);
+
   }
   
-  let city = searchInputVal
-  cityEl.textContent = city;
-  getWeather(city);
   
 } 
 
-
-
-searchFormEl.addEventListener('submit', handleSearchFormSubmit);
 
 function getWeather(city) {
 
@@ -59,6 +119,7 @@ function getWeather(city) {
     let humidData= data.main.humidity
     let windData= data.wind.speed
     let wIconData = data.weather[0].icon
+    
   
     let iconsURl = "http://openweathermap.org/img/w/"+wIconData+".png"
   
@@ -67,6 +128,38 @@ function getWeather(city) {
     humidSpanEl.textContent = " "+humidData+"%";
     windSpanEl.textContent = " "+windData+"mph";
     
+    let latData = data.coord.lat
+    let lonData = data.coord.lon
+    console.log(latData)
+    console.log(lonData)
+
+    getUV(latData, lonData);
+
+    function getUV(latData, lonData){
+      
+      let url = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + latData + '&lon=' + lonData + '&units=imperial&appid=' + apiKey;
+    
+      fetch(url)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+    
+        console.log('weekly forecast');
+        console.log(data);
+        
+        uvNumb = data.current.uvi;
+        console.log(uvNumb)
+        uvString = uvNumb.toString();
+        console.log(uvString)
+        uvSpanEl.textContent = " " + uvString;
+
+      });
+
+
+    }
+
+
   })
 
   
@@ -78,11 +171,14 @@ function getWeather(city) {
   
     // Day 1 Info
     let tempF1Data = data.list[1].main.temp
-    let humidF1Data= data.list[1].main.humidity
-    let windF1Data= data.list[1].wind.speed
+    let humidF1Data = data.list[1].main.humidity
+    let windF1Data = data.list[1].wind.speed
+    let dayF1Data = data.list[1].dt_txt
+
     tempSpanF1El.textContent = " "+tempF1Data+"°";
     humidSpanF1El.textContent = " "+humidF1Data+"%";
     windSpanF1El.textContent = " "+windF1Data+"mph";
+    dayF1El.textContent = " "+dayF1Data
     
     let wIconF1Data = data.list[1].weather[0].icon
     let iconsF1URl = "http://openweathermap.org/img/w/"+wIconF1Data+".png"
@@ -92,9 +188,13 @@ function getWeather(city) {
     let tempF2Data = data.list[9].main.temp
     let humidF2Data= data.list[9].main.humidity
     let windF2Data= data.list[9].wind.speed
+    let dayF2Data = data.list[9].dt_txt
+
     tempSpanF2El.textContent = " "+tempF2Data+"°";
     humidSpanF2El.textContent = " "+humidF2Data+"%";
     windSpanF2El.textContent = " "+windF2Data+"mph";
+    dayF2El.textContent = " "+dayF2Data
+
     
     let wIconF2Data = data.list[9].weather[0].icon
     let iconsF2URl = "http://openweathermap.org/img/w/"+wIconF2Data+".png"
@@ -105,9 +205,13 @@ function getWeather(city) {
     let tempF3Data = data.list[17].main.temp
     let humidF3Data= data.list[17].main.humidity
     let windF3Data= data.list[17].wind.speed
+    let dayF3Data = data.list[17].dt_txt
+
     tempSpanF3El.textContent = " "+tempF3Data+"°";
     humidSpanF3El.textContent = " "+humidF3Data+"%";
     windSpanF3El.textContent = " "+windF3Data+"mph";
+    dayF3El.textContent = " "+dayF3Data
+
     
     let wIconF3Data = data.list[17].weather[0].icon
     let iconsF3URl = "http://openweathermap.org/img/w/"+wIconF3Data+".png"
@@ -117,9 +221,13 @@ function getWeather(city) {
     let tempF4Data = data.list[25].main.temp
     let humidF4Data= data.list[25].main.humidity
     let windF4Data= data.list[25].wind.speed
+    let dayF4Data = data.list[25].dt_txt
+
     tempSpanF4El.textContent = " "+tempF4Data+"°";
     humidSpanF4El.textContent = " "+humidF4Data+"%";
     windSpanF4El.textContent = " "+windF4Data+"mph";
+    dayF4El.textContent = " "+dayF4Data
+
   
     let wIconF4Data = data.list[25].weather[0].icon
     let iconsF4URl = "http://openweathermap.org/img/w/"+wIconF4Data+".png"
@@ -129,9 +237,13 @@ function getWeather(city) {
     let tempF5Data = data.list[33].main.temp
     let humidF5Data= data.list[33].main.humidity
     let windF5Data= data.list[33].wind.speed
+    let dayF5Data = data.list[33].dt_txt
+
     tempSpanF5El.textContent = " "+tempF5Data+"°";
     humidSpanF5El.textContent = " "+humidF5Data+"%";
     windSpanF5El.textContent = " "+windF5Data+"mph";
+    dayF5El.textContent = " "+dayF5Data
+
   
     let wIconF5Data = data.list[33].weather[0].icon
     let iconsF5URl = "http://openweathermap.org/img/w/"+wIconF5Data+".png"
@@ -145,21 +257,31 @@ function getWeather(city) {
 }
 
 
+function renderCities() {
 
 
-//  Forecast
+  
+  console.log(cities)
+  for (var i = 0; i < cities.length; i++) {
+    let cityB = cities[i];
+    cbutton = $(`<button class="btn btn-info btn-block mb-3 histBtn" id="searchBtn">${cityB}</button>`)
+    
+    $(".historyButtonCon").append(cbutton);
+  }
+}
 
-
-
-// // https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
-// fetch("https://api.openweathermap.org/data/2.5/onecall?q="+city+"&appid="+apiKey+"&units=imperial")
-// .then(response => response.json())
-// .then(function(data){
-// console.log(data)
-// let tempData = data.list[0].main.temp
-// let humidData= temp1.list[0].main.humidity
-// let humidData= temp1.list[0].main.humidity
-// })
-
-
-
+function storeCities() {
+  
+  console.log(cities)
+  localStorage.setItem("cities", JSON.stringify(cities));
+}
+  
+function init() {
+  let storedCities = JSON.parse(localStorage.getItem("cities"));
+  console.log(storedCities)
+  if (storedCities !== null) {
+    cities = storedCities;
+  }
+  
+  renderCities();
+}

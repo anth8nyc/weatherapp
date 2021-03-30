@@ -23,28 +23,33 @@
   <hero class="flex-row bg-light"><h1>Weather Dashboard</h1></hero>
 
   
-  <div class="flex-row align-start align-content-start align-content-stretch-md bg-danger">
+  <div class="flex-row align-start align-content-start align-content-stretch-md min-vh-100 bg-info">
     
-    <div class="col-3 bg-light min-vh-100 p-3">
+    <div class="col-2 bg-light min-vh-100 p-3">
       <h2>Search for a City:</h2>
       <form id="search-form" class="mb-2">
         <input id="search-input" class="form-input w-100 mb-2" type="text" placeholder="Search">
-        <button class="btn btn-info btn-block">Search</button>
-        
-        <div class="historyButtonCon">
-            
-        </div>
+        <button class="btn btn-info btn-block mb-3" id="searchBtn">Search</button>
       </form>
+       
+      <div class="historyButtonCon">
+        <h4>Search History</h4>   
+         
+      </div>
+
+      <button class="btn btn-danger btn-block" id="clearBtn">Clear</button>
     </div>
-
-    <div class="col-9 p-3 text-light">
+    <div class="alert alert-primary m-auto hide" role="alert">
+      You must input a city name!
+    </div>
+    <div class="col-10 p-3 text-light results hide">
       <h2>Showing results for: <span id="result-text"></span></h2>
-      <div id="result-content">
+      <div>
 
 
-        <div class="card col-9 bg-light text-dark mb-3 p-3">
+        <div class="card bg-light text-dark mb-3 p-3">
           <div class="card-body">
-            <h3 class="citySel">Dallas</h3>
+            <h3 class="citySel"></h3>
             <div id="icon"><img id="wicon" src="" alt="Weather icon"></div>
             <p><strong>Temperature:</strong><span class="tempSpan"></span><br>
               <strong>Humidity:</strong><span class="humidSpan"></span> <br>
@@ -57,55 +62,52 @@
         <div class="card bg-light text-dark mb-3 p-3">
           <div class="card-body">
             <h3><span class="citySel"></span>5 day forecast</h3>
-            <div class="container m-auto row align-content-center">
+            <div class="container m-auto row w-fit-content align-content-center">
               
               <div class="col-2"> 
-
+                <h6 id="dayF1"></h6>
                 <div id="icon"><img id="wiconF1" src="" alt="Weather icon"></div>
                 <p><strong>Temperature:</strong><span class="tempF1Span"></span><br>
                   <strong>Humidity:</strong><span class="humidF1Span"></span> <br>
                   <strong>Wind Speed:</strong><span class="windF1Span"></span> <br>
-                  <strong>UV Index:</strong><span class="uvF1Span"></span><br>
                 </p>
                 
               </div>              
               <div class="col-2"> 
-                
+                <h6 id="dayF2"></h6>
                 <div id="icon"><img id="wiconF2" src="" alt="Weather icon"></div>
                 <p><strong>Temperature:</strong><span class="tempF2Span"></span><br>
                   <strong>Humidity:</strong><span class="humidF2Span"></span> <br>
                   <strong>Wind Speed:</strong><span class="windF2Span"></span> <br>
-                  <strong>UV Index:</strong><span class="uvF2Span"></span><br>
                 </p>
                 
               </div>              
               <div class="col-2"> 
-                
+                <h6 id="dayF3"></h6>
                 <div id="icon"><img id="wiconF3" src="" alt="Weather icon"></div>
                 <p><strong>Temperature:</strong><span class="tempF3Span"></span><br>
                   <strong>Humidity:</strong><span class="humidF3Span"></span> <br>
                   <strong>Wind Speed:</strong><span class="windF3Span"></span> <br>
-                  <strong>UV Index:</strong><span class="uvF3Span"></span><br>
                 </p>
                 
               </div>              
               <div class="col-2"> 
                 
+                <h6 id="dayF4"></h6>
                 <div id="icon"><img id="wiconF4" src="" alt="Weather icon"></div>
                 <p><strong>Temperature:</strong><span class="tempF4Span"></span><br>
                   <strong>Humidity:</strong><span class="humidF4Span"></span> <br>
                   <strong>Wind Speed:</strong><span class="windF4Span"></span> <br>
-                  <strong>UV Index:</strong><span class="uvF4Span"></span><br>
                 </p>
                 
               </div>              
               <div class="col-2"> 
                 
+                <h6 id="dayF5"></h6>
                 <div id="icon"><img id="wiconF5" src="" alt="Weather icon"></div>
                 <p><strong>Temperature:</strong><span class="tempF5Span"></span><br>
                   <strong>Humidity:</strong><span class="humidF5Span"></span> <br>
                   <strong>Wind Speed:</strong><span class="windF5Span"></span> <br>
-                  <strong>UV Index:</strong><span class="uvF5Span"></span><br>
                 </p>
                 
               </div>              
@@ -134,9 +136,10 @@
   </div>
 
 
-  <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script> -->
 
-  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
  
   <script src="./assets/script.js"></script>
 </body>
