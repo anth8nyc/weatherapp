@@ -122,6 +122,8 @@ function getWeather(city) {
   fetch("https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid="+apiKey+"&units=imperial")
   .then(response => response.json())
   .then(function(data){
+
+    console.log(data)
     
     let tempData = data.main.temp
     let humidData= data.main.humidity
@@ -129,7 +131,7 @@ function getWeather(city) {
     let wIconData = data.weather[0].icon
     let cityName = data.name
     
-    let iconsURl = "https://openweathermap.org/img/w/"+wIconData+".png"
+    let iconsURl = "https://openweathermap.org/img/wn/"+wIconData+"@2x.png"
     
     cityEl.textContent = cityName + " – " + todaysDate;
     document.getElementById("wicon").src = iconsURl;
@@ -179,7 +181,7 @@ function getWeather(city) {
   .then(response => response.json())
   .then(function(data){
   
-  
+    console.log(data)
     // Day 1 Info
     let tempF1Data = data.list[1].main.temp
     let humidF1Data = data.list[1].main.humidity
@@ -193,7 +195,8 @@ function getWeather(city) {
     dayF1El.textContent = " "+formDayF1
     
     let wIconF1Data = data.list[1].weather[0].icon
-    let iconsF1URl = "https://openweathermap.org/img/w/"+wIconF1Data+".png"
+    // http://openweathermap.org/img/wn/10d@2x.png
+    let iconsF1URl = "https://openweathermap.org/img/wn/"+wIconF1Data+"@2x.png"
     document.getElementById("wiconF1").src = iconsF1URl;
     
     // Day 2 Info
@@ -211,7 +214,7 @@ function getWeather(city) {
 
     
     let wIconF2Data = data.list[9].weather[0].icon
-    let iconsF2URl = "https://openweathermap.org/img/w/"+wIconF2Data+".png"
+    let iconsF2URl = "https://openweathermap.org/img/wn/"+wIconF2Data+"@2x.png"
     document.getElementById("wiconF2").src = iconsF2URl;
   
   
@@ -230,7 +233,7 @@ function getWeather(city) {
 
     
     let wIconF3Data = data.list[17].weather[0].icon
-    let iconsF3URl = "https://openweathermap.org/img/w/"+wIconF3Data+".png"
+    let iconsF3URl = "https://openweathermap.org/img/wn/"+wIconF3Data+"@2x.png"
     document.getElementById("wiconF3").src = iconsF3URl;
   
     // Day 4 Info
@@ -248,7 +251,7 @@ function getWeather(city) {
 
   
     let wIconF4Data = data.list[25].weather[0].icon
-    let iconsF4URl = "https://openweathermap.org/img/w/"+wIconF4Data+".png"
+    let iconsF4URl = "https://openweathermap.org/img/wn/"+wIconF4Data+"@2x.png"
     document.getElementById("wiconF4").src = iconsF4URl;
     
     // Day 5 Info
@@ -266,7 +269,7 @@ function getWeather(city) {
 
   
     let wIconF5Data = data.list[33].weather[0].icon
-    let iconsF5URl = "https://openweathermap.org/img/w/"+wIconF5Data+".png"
+    let iconsF5URl = "https://openweathermap.org/img/wn/"+wIconF5Data+"@2x.png"
     document.getElementById("wiconF5").src = iconsF5URl;
   
   })
