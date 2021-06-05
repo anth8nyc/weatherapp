@@ -11,42 +11,43 @@
     rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" 
     crossorigin="anonymous"/>
-
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/style.css" />
 </head>
 
 <body>
     
-  <hero class="flex-row bg-light"><h1>Weather Dashboard</h1></hero>
+  <nav class="m-2 justify-content-center flex-row"><h1>weather dashboard</h1></nav>
   
-  <div class="flex-row align-start align-content-start align-content-stretch-md min-vh-100 bg-info">
+  <div class="flex-row align-start align-content-start align-content-stretch-md min-vh-100 bgSky">
     
-    <div class="col-2 bg-light min-vh-100 p-3">
+    <div class="col-md-3 col-12 p-3">
       <h2>Search for a City:</h2>
       <form id="search-form" class="mb-2">
         <input id="search-input" class="form-input w-100 mb-2" type="text" placeholder="Search">
         <button class="btn btn-info btn-block mb-3" id="searchBtn">Search</button>
       </form>
-       
       <div class="historyButtonCon">
         <h4>Search History</h4>   
-
       </div>
-
       <button class="btn btn-danger btn-block" id="clearBtn">Clear</button>
     </div>
+
+
     <div class="alert alert-primary m-auto hide" role="alert">
       You must input a city name!
     </div>
-    <div class="col-10 p-3 text-light results hide">
+
+    <div class="col-md-9 col-12 p-3 text-light results hide">
       <h2>Showing results for: <span id="result-text"></span></h2>
-      <div>
+      <div class="d-flex flex-row">
 
-
-        <div class="card bg-light text-dark mb-3 p-3">
+        <div class="card bg-light text-dark mb-3 p-3 col-md-4 col-12">
           <div class="card-body">
-            <h3 class="citySel"></h3>
-            <div id="icon"><img id="wicon" src="" alt="Weather icon"></div>
+            <div id="icon">
+              <h3 class="citySel"></h3>
+              <img id="wicon" src="" alt="Weather icon"></div>
             <p><strong>Temperature:</strong><span class="tempSpan"></span><br>
               <strong>Humidity:</strong><span class="humidSpan"></span> <br>
               <strong>Wind Speed:</strong><span class="windSpan"></span> <br>
@@ -55,58 +56,76 @@
           </div>
         </div>
         
-        <div class="card bg-light text-dark mb-3 p-3">
-          <div class="card-body">
-            <h3><span class="citySel"></span>5 day forecast</h3>
-            <div class="container m-auto row w-fit-content align-content-center">
+        <div class="card bg-light text-dark mb-3 p-3 col-md-8 col-12">
+          <div class="card-body justify-content-center">
+            <h3 class="text-align-center justify-content-center">5 day forecast</h3>
+            <div class="container m-auto w-fit-content align-items-center ">
               
-              <div class="col-2"> 
-                <h6 id="dayF1"></h6>
-                <div id="icon"><img id="wiconF1" src="" alt="Weather icon"></div>
-                <p><strong>Temperature:</strong><span class="tempF1Span"></span><br>
-                  <strong>Humidity:</strong><span class="humidF1Span"></span> <br>
-                  <strong>Wind Speed:</strong><span class="windF1Span"></span> <br>
-                </p>
-                
+              <div class="row dayF"> 
+                <div id="icon">
+                  <h6 id="dayF1"></h6>
+                </div>
+                <div class="row align-items-center">
+                  <img id="wiconF1" src="" alt="Weather icon">
+                  <p>Temperature:<span class="tempF1Span"></span> |
+                    Humidity:<span class="humidF1Span"></span> |
+                    Wind Speed:<span class="windF1Span"></span> 
+                  </p>
+                </div>
+              </div>
+
+              <div class="row dayF"> 
+                <div id="icon">
+                  <h6 id="dayF2"></h6>
+                </div>
+                <div class="row align-items-center">
+                  <img id="wiconF2" src="" alt="Weather icon">
+                  <p>Temperature:<span class="tempF2Span"></span> |
+                    Humidity:<span class="humidF2Span"></span> |
+                    Wind Speed:<span class="windF2Span"></span> 
+                  </p>
+                </div>
               </div>              
-              <div class="col-2"> 
-                <h6 id="dayF2"></h6>
-                <div id="icon"><img id="wiconF2" src="" alt="Weather icon"></div>
-                <p><strong>Temperature:</strong><span class="tempF2Span"></span><br>
-                  <strong>Humidity:</strong><span class="humidF2Span"></span> <br>
-                  <strong>Wind Speed:</strong><span class="windF2Span"></span> <br>
-                </p>
-                
+              
+              <div class="row dayF"> 
+                <div id="icon">
+                  <h6 id="dayF3"></h6>
+                </div>
+                <div class="row align-items-center">
+                  <img id="wiconF3" src="" alt="Weather icon">
+                  <p>Temperature:<span class="tempF3Span"></span> |
+                    Humidity:<span class="humidF3Span"></span> |
+                    Wind Speed:<span class="windF3Span"></span> 
+                  </p>
+                </div>
+              </div>
+
+              <div class="row dayF"> 
+                <div id="icon">
+                  <h6 id="dayF4"></h6>
+                </div>
+                <div class="row align-items-center">
+                  <img id="wiconF4" src="" alt="Weather icon">
+                  <p>Temperature:<span class="tempF4Span"></span> |
+                    Humidity:<span class="humidF4Span"></span> |
+                    Wind Speed:<span class="windF4Span"></span> 
+                  </p>
+                </div>
               </div>              
-              <div class="col-2"> 
-                <h6 id="dayF3"></h6>
-                <div id="icon"><img id="wiconF3" src="" alt="Weather icon"></div>
-                <p><strong>Temperature:</strong><span class="tempF3Span"></span><br>
-                  <strong>Humidity:</strong><span class="humidF3Span"></span> <br>
-                  <strong>Wind Speed:</strong><span class="windF3Span"></span> <br>
-                </p>
                 
+              <div class="row dayF"> 
+                <div id="icon">
+                  <h6 id="dayF5"></h6>
+                </div>
+                <div class="row align-items-center">
+                  <img id="wiconF5" src="" alt="Weather icon">
+                  <p>Temperature:<span class="tempF5Span"></span> |
+                    Humidity:<span class="humidF5Span"></span> |
+                    Wind Speed:<span class="windF5Span"></span> 
+                  </p>
+                </div>
               </div>              
-              <div class="col-2"> 
                 
-                <h6 id="dayF4"></h6>
-                <div id="icon"><img id="wiconF4" src="" alt="Weather icon"></div>
-                <p><strong>Temperature:</strong><span class="tempF4Span"></span><br>
-                  <strong>Humidity:</strong><span class="humidF4Span"></span> <br>
-                  <strong>Wind Speed:</strong><span class="windF4Span"></span> <br>
-                </p>
-                
-              </div>              
-              <div class="col-2"> 
-                
-                <h6 id="dayF5"></h6>
-                <div id="icon"><img id="wiconF5" src="" alt="Weather icon"></div>
-                <p><strong>Temperature:</strong><span class="tempF5Span"></span><br>
-                  <strong>Humidity:</strong><span class="humidF5Span"></span> <br>
-                  <strong>Wind Speed:</strong><span class="windF5Span"></span> <br>
-                </p>
-                
-              </div>              
             </div>    
           </div>
         </div>

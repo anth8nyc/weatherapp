@@ -1,116 +1,125 @@
 body {
-    font-family: 'Fira Sans', sans-serif;
-  }
-  
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: 'Merriweather', serif;
-    font-weight: 700;
-  }
-  
+  font-family: "Fredoka One", cursive;
+}
 
-  .justify-space-between {
-    justify-content: space-between;
-  }
-  
-  .justify-space-around {
-    justify-content: space-around;
-  }
-  
-  .justify-flex-start {
-    justify-content: flex-start;
-  }
-  
-  .justify-flex-end {
-    justify-content: flex-end;
-  }
-  
-  .justify-center {
-    justify-content: center;
-  }
-  
-  .align-start {
-    align-items: flex-start;
-  }
-  
-  .align-stretch {
-    align-items: stretch;
-  }
-  
-  .align-end {
-    align-items: flex-end;
-  }
-  
-  .align-center {
-    align-items: center;
-  }
-  
-  .align-content-start {
-    align-content: flex-start;
-  }
-  
-  .align-content-stretch {
-    align-content: stretch;
-  }
-  
-  .align-content-end {
-    align-content: flex-end;
-  }
-  
-  .align-content-center {
-    align-content: center;
-  }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Fredoka One", cursive;
+  font-weight: 700;
+}
 
-  .align-start-sm {
-    align-items: flex-start;
-  }
-  .align-stretch-sm {
-    align-items: stretch;
-  }
-  .align-end-sm {
-    align-items: flex-end;
-  }
-  .align-center-sm {
-    align-items: center;
-  }
-  .align-content-start-sm {
-    align-content: flex-start;
-  }
-  .align-content-stretch-sm {
-    align-content: stretch;
-  }
-  .align-content-end-sm {
-    align-content: flex-end;
-  }
-  .align-content-center-sm {
-    align-content: center;
-  }
+.bgSky {
 
-  .flex-row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
+  background-color: skyblue;
+}
 
-  .hide {
+.dayF {
+  margin-top: 5px;
+  border-top: skyblue;
+  /* border-bottom: black; */
+  border-top-style: solid;
+  /* border-bottom-style: solid; */
+}
 
-    display: none;
+.justify-space-between {
+  justify-content: space-between;
+}
 
-  }
+.justify-space-around {
+  justify-content: space-around;
+}
 
+.justify-flex-start {
+  justify-content: flex-start;
+}
 
-  .lowUV{
-    background-color: green;
-  }
+.justify-flex-end {
+  justify-content: flex-end;
+}
 
-  .medUV{
-    background-color: yellow;
-  }
+.justify-center {
+  justify-content: center;
+}
 
-  .highUV{
-    background-color: red;
-  }
+.align-start {
+  align-items: flex-start;
+}
+
+.align-stretch {
+  align-items: stretch;
+}
+
+.align-end {
+  align-items: flex-end;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.align-content-start {
+  align-content: flex-start;
+}
+
+.align-content-stretch {
+  align-content: stretch;
+}
+
+.align-content-end {
+  align-content: flex-end;
+}
+
+.align-content-center {
+  align-content: center;
+}
+
+.align-start-sm {
+  align-items: flex-start;
+}
+.align-stretch-sm {
+  align-items: stretch;
+}
+.align-end-sm {
+  align-items: flex-end;
+}
+.align-center-sm {
+  align-items: center;
+}
+.align-content-start-sm {
+  align-content: flex-start;
+}
+.align-content-stretch-sm {
+  align-content: stretch;
+}
+.align-content-end-sm {
+  align-content: flex-end;
+}
+.align-content-center-sm {
+  align-content: center;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.hide {
+  display: none;
+}
+
+.lowUV {
+  color: rgb(56, 166, 56);
+}
+
+.medUV {
+  color: rgb(234, 234, 141);
+}
+
+.highUV {
+  color: rgb(255, 80, 80);
+}

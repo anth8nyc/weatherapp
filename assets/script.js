@@ -52,6 +52,8 @@ citiesList.addEventListener('click', citySelected);
 clearBtnEl.addEventListener('click', clearSearchHistory); 
 
 function citySelected(event) {
+  alertEl.classList.add('hide')
+  resultsEl.classList.remove('hide')
 
   getWeather(event.target.textContent)
   
@@ -99,6 +101,20 @@ function handleSearch(event) {
   }
   
 } 
+
+function formatDate(date) {
+  // Returns data as:
+  // Day, Month, day, yyyy
+  let newDate = Intl.DateTimeFormat(
+      'en', 
+      { weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      })
+        .format(new Date(date));
+  return (newDate);
+}
 
 function getWeather(city) {
   
@@ -169,11 +185,12 @@ function getWeather(city) {
     let humidF1Data = data.list[1].main.humidity
     let windF1Data = data.list[1].wind.speed
     let dayF1Data = data.list[1].dt_txt
+    let formDayF1 = formatDate(dayF1Data);
 
     tempSpanF1El.textContent = " "+tempF1Data+"°";
     humidSpanF1El.textContent = " "+humidF1Data+"%";
     windSpanF1El.textContent = " "+windF1Data+"mph";
-    dayF1El.textContent = " "+dayF1Data
+    dayF1El.textContent = " "+formDayF1
     
     let wIconF1Data = data.list[1].weather[0].icon
     let iconsF1URl = "https://openweathermap.org/img/w/"+wIconF1Data+".png"
@@ -184,11 +201,13 @@ function getWeather(city) {
     let humidF2Data= data.list[9].main.humidity
     let windF2Data= data.list[9].wind.speed
     let dayF2Data = data.list[9].dt_txt
+    let formDayF2 = formatDate(dayF2Data);
+
 
     tempSpanF2El.textContent = " "+tempF2Data+"°";
     humidSpanF2El.textContent = " "+humidF2Data+"%";
     windSpanF2El.textContent = " "+windF2Data+"mph";
-    dayF2El.textContent = " "+dayF2Data
+    dayF2El.textContent = " "+formDayF2
 
     
     let wIconF2Data = data.list[9].weather[0].icon
@@ -201,11 +220,13 @@ function getWeather(city) {
     let humidF3Data= data.list[17].main.humidity
     let windF3Data= data.list[17].wind.speed
     let dayF3Data = data.list[17].dt_txt
+    let formDayF3 = formatDate(dayF3Data);
+
 
     tempSpanF3El.textContent = " "+tempF3Data+"°";
     humidSpanF3El.textContent = " "+humidF3Data+"%";
     windSpanF3El.textContent = " "+windF3Data+"mph";
-    dayF3El.textContent = " "+dayF3Data
+    dayF3El.textContent = " "+formDayF3
 
     
     let wIconF3Data = data.list[17].weather[0].icon
@@ -217,11 +238,13 @@ function getWeather(city) {
     let humidF4Data= data.list[25].main.humidity
     let windF4Data= data.list[25].wind.speed
     let dayF4Data = data.list[25].dt_txt
+    let formDayF4 = formatDate(dayF4Data);
+
 
     tempSpanF4El.textContent = " "+tempF4Data+"°";
     humidSpanF4El.textContent = " "+humidF4Data+"%";
     windSpanF4El.textContent = " "+windF4Data+"mph";
-    dayF4El.textContent = " "+dayF4Data
+    dayF4El.textContent = " "+formDayF4
 
   
     let wIconF4Data = data.list[25].weather[0].icon
@@ -233,11 +256,13 @@ function getWeather(city) {
     let humidF5Data= data.list[33].main.humidity
     let windF5Data= data.list[33].wind.speed
     let dayF5Data = data.list[33].dt_txt
+    let formDayF5 = formatDate(dayF5Data);
+
 
     tempSpanF5El.textContent = " "+tempF5Data+"°";
     humidSpanF5El.textContent = " "+humidF5Data+"%";
     windSpanF5El.textContent = " "+windF5Data+"mph";
-    dayF5El.textContent = " "+dayF5Data
+    dayF5El.textContent = " "+formDayF5
 
   
     let wIconF5Data = data.list[33].weather[0].icon
