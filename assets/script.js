@@ -186,7 +186,7 @@ function getWeather(city) {
     let tempF1Data = data.list[1].main.temp
     let humidF1Data = data.list[1].main.humidity
     let windF1Data = data.list[1].wind.speed
-    let dayF1Data = data.list[1].dt_txt
+    let dayF1Data = data.list[1].dt
     let formDayF1 = formatDate(dayF1Data);
 
     tempSpanF1El.textContent = " "+tempF1Data+"°";
@@ -203,7 +203,7 @@ function getWeather(city) {
     let tempF2Data = data.list[9].main.temp
     let humidF2Data= data.list[9].main.humidity
     let windF2Data= data.list[9].wind.speed
-    let dayF2Data = data.list[9].dt_txt
+    let dayF2Data = data.list[9].dt
     let formDayF2 = formatDate(dayF2Data);
 
 
@@ -222,7 +222,7 @@ function getWeather(city) {
     let tempF3Data = data.list[17].main.temp
     let humidF3Data= data.list[17].main.humidity
     let windF3Data= data.list[17].wind.speed
-    let dayF3Data = data.list[17].dt_txt
+    let dayF3Data = data.list[17].dt
     let formDayF3 = formatDate(dayF3Data);
 
 
@@ -240,7 +240,7 @@ function getWeather(city) {
     let tempF4Data = data.list[25].main.temp
     let humidF4Data= data.list[25].main.humidity
     let windF4Data= data.list[25].wind.speed
-    let dayF4Data = data.list[25].dt_txt
+    let dayF4Data = data.list[25].dt
     let formDayF4 = formatDate(dayF4Data);
 
 
@@ -258,7 +258,7 @@ function getWeather(city) {
     let tempF5Data = data.list[33].main.temp
     let humidF5Data= data.list[33].main.humidity
     let windF5Data= data.list[33].wind.speed
-    let dayF5Data = data.list[33].dt_txt
+    let dayF5Data = data.list[33].dt
     let formDayF5 = formatDate(dayF5Data);
 
 
